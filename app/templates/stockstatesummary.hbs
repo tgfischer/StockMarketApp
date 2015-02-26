@@ -1,0 +1,50 @@
+<nav class="navbar navbar-inverse">
+	<div class="container-fluid">
+		<div class="navbar-header">
+
+		</div>
+		<div id="navbar" class="collapse navbar-collapse">
+			<ul class="nav navbar-nav">
+				<li><a href="#volume">Most Active By Volume</a></li>
+				<li><a href="#gainers">Gainers</a></li>
+				<li><a href="#losers">Losers</a></li>
+			</ul>
+		</div>
+	</div>
+</nav>
+
+<div class="panel panel-default">
+	<table class="table table-bordered table-hover">
+		<thead>
+			<tr>
+				<th>Company</th>
+				<th>Open Price</th>
+				<th>Current Price</th>
+				<th>Change</th>
+				<th>Share Volume</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			{{#each company in model}}
+				<tr>
+					<td class="vertical-align">
+						{{#link-to 'marketby' company}}
+							{{company.name}}
+						{{/link-to}}
+					</td>
+					<td class="vertical-align">${{company.openPrice}}</td>
+					<td class="vertical-align">${{company.currentPrice}}</td>
+					<td class="vertical-align">{{company.value}} ({{company.percent}}%)</td>
+					<td class="vertical-align">{{company.volume}}</td>
+					<td class="vertical-align">
+						<button type="button" class="btn btn-primary" {{action "buying"}}>Buy</button> 
+						<button type="button" class="btn btn-primary" {{action "selling"}}>Sell</button>
+					</td>
+				</tr>
+			{{/each}}
+		</tbody>
+	</table>
+</div>
+
+{{outlet}}

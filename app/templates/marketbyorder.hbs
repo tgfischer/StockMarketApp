@@ -1,0 +1,24 @@
+<table class="table table-bordered table-striped table-hover transpose">
+	<thead>
+		<tr>
+			<th colspan="2">Buy</th>
+			<th colspan="2">Sell</th>
+		</tr>
+		<tr>
+			<th>Volume</th>
+			<th>Price</th>
+			<th>Volume</th>
+			<th>Price</th>
+		</tr>
+	</thead>
+	<tbody>
+		{{#each stock in stocks}}
+			<tr>
+				<td class="vertical-align">{{stock.volume}}</td>
+				<td class="vertical-align">{{stock.price}}</td>
+				<td class="vertical-align"></td>
+				<td class="vertical-align"></td>
+			</tr>
+		{{/each}}
+	</tbody>
+</table>
