@@ -38,8 +38,8 @@
 					<td class="vertical-align">{{company.value}} ({{company.percent}}%)</td>
 					<td class="vertical-align">{{company.volume}}</td>
 					<td class="vertical-align">
-						<button type="button" class="btn btn-primary" {{action "buying"}}>Buy</button> 
-						<button type="button" class="btn btn-primary" {{action "selling"}}>Sell</button>
+						<button type="button" class="btn btn-primary">{{#link-to 'placebidorder' company}}Buy{{/link-to}}</button> 
+						<button type="button" class="btn btn-primary" {{action "open" "placesellorder" company}}>Sell</button>
 					</td>
 				</tr>
 			{{/each}}
