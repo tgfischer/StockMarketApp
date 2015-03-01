@@ -12,10 +12,10 @@
 		</tr>
 	</thead>
 	<tbody>
-		{{#each stock in stocks}}
+		{{#each bid in this.bidOrders}}
 			<tr>
-				<td class="vertical-align">{{stock.volume}}</td>
-				<td class="vertical-align">{{stock.price}}</td>
+				<td class="vertical-align">{{bid.volume}}</td>
+				<td class="vertical-align">${{bid.price}}</td>
 				<td class="vertical-align"></td>
 				<td class="vertical-align"></td>
 			</tr>
