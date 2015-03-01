@@ -21,11 +21,20 @@ var StockStateSummaryController = {
 			this.set('isSelling', false);
 			this.set('company', null);
 		},
-		open: function(name, company) {
+		open: function(name) {
 			return this.render(name, { outlet : name });
 		},
-		close: function(name) {
+		close: function() {
 			return this.disconnectOutlet();
+		},
+		up: function(value) {
+			return value > 0;
+		},
+		down: function(value) {
+			return value < 0;
+		},
+		noChange: function(value) {
+			return value === 0;
 		}
 	}
 };

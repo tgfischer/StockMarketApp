@@ -35,11 +35,15 @@
 					</td>
 					<td class="vertical-align">${{company.openPrice}}</td>
 					<td class="vertical-align">${{company.currentPrice}}</td>
-					<td class="vertical-align">{{company.value}} ({{company.percent}}%)</td>
+					<td class="vertical-align">
+						{{company.value}} 
+						<img {{bind-attr src=company.diffURL}} alt="logo" />
+						{{company.percent}}%
+					</td>
 					<td class="vertical-align">{{company.volume}}</td>
 					<td class="vertical-align">
 						<button type="button" class="btn btn-primary">{{#link-to 'placebidorder' company}}Buy{{/link-to}}</button> 
-						<button type="button" class="btn btn-primary" {{action "open" "placesellorder" company}}>Sell</button>
+						<button type="button" class="btn btn-primary">{{#link-to 'placesellorder' company}}Sell{{/link-to}}</button>
 					</td>
 				</tr>
 			{{/each}}

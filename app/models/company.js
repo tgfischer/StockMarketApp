@@ -28,7 +28,17 @@ var Company = DS.Model.extend({
 		} else {
 			return percent.toFixed(2);
 		}
-	}.property('openPrice', 'currentPrice')
+	}.property('openPrice', 'currentPrice'),
+
+    diffURL: function() {
+        if (this.get('value') === 0) {
+            return 'assets/images/noChange.png';
+        } else if (this.get('value') > 0) {
+            return 'assets/images/up.png';
+        } else if (this.get('value') < 0) {
+            return 'assets/images/down.png';
+        }
+    }.property('value')
 });
 
 Company.reopenClass({

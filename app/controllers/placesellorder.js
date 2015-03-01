@@ -1,17 +1,17 @@
 import Ember from 'ember';
 
-var PlaceBidOrderController = {
+var PlaceSellOrderController = {
 	actions: {
 		submit : function(companyID) {
 			if (!isPositiveInteger(this.get('vol')) || !isPositiveInteger(this.get('price'))) { return; }
 
-			var bidOrder = this.store.createRecord('bidorder', {
+			var sellOrder = this.store.createRecord('sellorder', {
 				volume  : this.get('vol'),
 				price   : this.get('price')
 			});
 
 			this.store.find('company', companyID).then(function(company) {
-				bidOrder.set('company', company);
+				sellOrder.set('company', company);
 			});
 
 			this.set('vol', '');
@@ -28,4 +28,4 @@ function isPositiveInteger(n) {
     return n >>> 0 === parseFloat(n);
 }
 
-export default Ember.ObjectController.extend(PlaceBidOrderController);
+export default Ember.ObjectController.extend(PlaceSellOrderController);
