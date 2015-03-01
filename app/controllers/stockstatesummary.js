@@ -21,8 +21,8 @@ var StockStateSummaryController = {
 			this.set('isSelling', false);
 			this.set('company', null);
 		},
-		open: function(name) {
-			return this.render(name, { outlet : name });
+		open: function(route, companyID) {
+			this.transitionToRoute(route, companyID);
 		},
 		close: function() {
 			return this.disconnectOutlet();
