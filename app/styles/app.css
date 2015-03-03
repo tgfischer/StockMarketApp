@@ -49,3 +49,18 @@ code {
     vertical-align: middle;
     float: none;
 }
+
+.no-padding:first-child {
+  padding-left: 15px;
+  padding-right: 0;
+}
+
+.no-padding:last-child {
+  padding-left: 0;
+  padding-right: 15px;
+}
+
+.image-margin {
+  margin-top: 15px;
+  margin-bottom: 15px;
+}

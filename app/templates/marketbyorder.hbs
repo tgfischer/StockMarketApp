@@ -12,13 +12,6 @@
 		</tr>
 	</thead>
 	<tbody>
-		{{#each bid in this.bidOrders}}
-			<tr>
-				<td class="vertical-align">{{bid.volume}}</td>
-				<td class="vertical-align">${{bid.price}}</td>
-				<td class="vertical-align"></td>
-				<td class="vertical-align"></td>
-			</tr>
-		{{/each}}
+		{{build-table "order" this.bidOrders this.sellOrders}}
 	</tbody>
 </table>

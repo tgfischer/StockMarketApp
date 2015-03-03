@@ -37,7 +37,7 @@
 					<td class="vertical-align">${{company.currentPrice}}</td>
 					<td class="vertical-align">
 						{{company.value}} 
-						<img {{bind-attr src=company.diffURL}} alt="logo" />
+						{{change-image company.value}}
 						{{company.percent}}%
 					</td>
 					<td class="vertical-align">{{company.volume}}</td>
