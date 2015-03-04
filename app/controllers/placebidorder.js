@@ -48,7 +48,7 @@ var PlaceBidOrderController = {
 
 			this.set('vol', '');
 			this.set('price', '');
-			this.transitionToRoute('stockstatesummary');
+			this.transitionToRoute('marketby', companyID);
 		},
 		cancel : function() {
 			window.history.go(-1);
