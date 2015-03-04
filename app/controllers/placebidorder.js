@@ -5,13 +5,45 @@ var PlaceBidOrderController = {
 		submit : function(companyID) {
 			if (!isPositiveInteger(this.get('vol')) || !isPositiveInteger(this.get('price'))) { return; }
 
-			var bidOrder = this.store.createRecord('bidorder', {
-				volume  : this.get('vol'),
-				price   : this.get('price')
-			});
+			var requestVolume = parseInt(this.get('vol'));
+			var requestPrice = parseInt(this.get('price'));
+			var newVolume = 0;
+			var _this = this;
 
-			this.store.find('company', companyID).then(function(company) {
-				bidOrder.set('company', company);
+			_this.store.find('company', companyID).then(function(company) {
+				var sellOrders = company.get('sellOrders').sortBy('price');
+
+				sellOrders.forEach(function(order) {
+					var orderPrice = parseInt(order.get('price'));
+					var orderVolume = parseInt(order.get('volume'));
+
+					if (requestPrice >= orderPrice) {
+						if (orderVolume > requestVolume) {
+							orderVolume -= requestVolume;
+							newVolume += requestVolume;
+							requestVolume = 0;
+							order.set('volume', orderVolume);
+						} else {
+							newVolume += orderVolume;
+							requestVolume -= orderVolume;
+
+							order.unloadRecord();
+						}
+
+						company.set('currentPrice', parseInt(requestPrice));
+					}
+				});
+
+				if (requestVolume > 0) {
+					var bidOrder = _this.store.createRecord('bidorder', {
+						volume  : requestVolume,
+						price   : requestPrice
+					});
+
+					bidOrder.set('company', company);
+				}
+
+				company.set('volume', parseInt(company.get('volume')) + newVolume);
 			});
 
 			this.set('vol', '');
