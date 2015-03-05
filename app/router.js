@@ -2,11 +2,7 @@ import Ember from 'ember';
 import config from './config/environment';
 
 var Router = Ember.Router.extend({
-  location: config.locationType,
-  renderTemplate: function() {
-    //this.render({ outlet: 'placebidorder' });
-    //this.render({ outlet: 'placesellorder' });
-  }
+  location: config.locationType
 });
 
 Router.map(function() {
@@ -15,8 +11,6 @@ Router.map(function() {
 		this.resource('placebidorder', { path : 'bid/:company_id' });
 		this.resource('placesellorder', { path : 'sell/:company_id' });
 	});
-	//this.resource('placebidorder');
-	//this.resource('placesellorder');
 });
 
 export default Router;

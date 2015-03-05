@@ -1,42 +1,41 @@
 import Ember from 'ember';
 
 var StockStateSummaryController = {
-	isBuying: false,
-	isSelling: false,
-	company: null,
+	state: 'alphabetical',
+	companySortProperties: ['name'],
+	sortedCompanies: Ember.computed.sort('model', 'companySortProperties'),
 	actions: {
-		buying: function(company) {
-			this.set('isBuying', true);
-			this.set('company', company);
-		},
-		doneBuying: function() {
-			this.set('isBuying', false);
-			this.set('company', null);
-		},
-		selling: function(company) {
-			this.set('isSelling', true);
-			this.set('company', company);
-		},
-		doneSelling: function() {
-			this.set('isSelling', false);
-			this.set('company', null);
-		},
 		open: function(route, companyID) {
 			this.transitionToRoute(route, companyID);
 		},
-		close: function() {
-			return this.disconnectOutlet();
+		activeByVolume: function() {
+			if (this.get('state') != 'activeByVolume') {
+				this.set('companySortProperties', ['volume:desc']);
+				this.set('state', 'activeByVolume');
+			} else {
+				this.set('companySortProperties', ['name']);
+				this.set('state', 'alphabetical');
+			}
 		},
-		up: function(value) {
-			return value > 0;
+		gainers: function() {
+			if (this.get('state') != 'gainers') {
+				this.set('companySortProperties', ['volume:desc']);
+				this.set('state', 'gainers');
+			} else {
+				this.set('companySortProperties', ['name']);
+				this.set('state', 'alphabetical');
+			}
 		},
-		down: function(value) {
-			return value < 0;
-		},
-		noChange: function(value) {
-			return value === 0;
+		losers: function() {
+			if (this.get('state') != 'losers') {
+				this.set('companySortProperties', ['volume:desc']);
+				this.set('state', 'losers');
+			} else {
+				this.set('companySortProperties', ['name']);
+				this.set('state', 'alphabetical');
+			}
 		}
 	}
 };
 
-export default Ember.ObjectController.extend(StockStateSummaryController);
+export default Ember.ArrayController.extend(StockStateSummaryController);

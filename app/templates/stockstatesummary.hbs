@@ -5,9 +5,9 @@
 		</div>
 		<div id="navbar" class="collapse navbar-collapse">
 			<ul class="nav navbar-nav">
-				<li><a href="#volume">Most Active By Volume</a></li>
-				<li><a href="#gainers">Gainers</a></li>
-				<li><a href="#losers">Losers</a></li>
+				<li><a {{action 'activeByVolume'}}>Most Active By Volume</a></li>
+				<li><a {{action 'gainers'}}>Gainers</a></li>
+				<li><a {{action 'losers'}}>Losers</a></li>
 			</ul>
 		</div>
 	</div>
@@ -26,7 +26,7 @@
 			</tr>
 		</thead>
 		<tbody>
-			{{#each company in model}}
+			{{#each company in sortedCompanies}}
 				<tr>
 					<td class="vertical-align">
 						{{#link-to 'marketby' company}}
