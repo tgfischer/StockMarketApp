@@ -35,5 +35,8 @@
     "express": "^4.8.5",
     "glob": "^4.0.5",
     "ember-localstorage-adapter": "~0.5.2"
+  },
+  "dependencies": {
+    "ember-cli-fixture-loader": "0.0.2"
   }
 }
