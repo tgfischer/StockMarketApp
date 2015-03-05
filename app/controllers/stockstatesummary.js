@@ -4,6 +4,26 @@ var StockStateSummaryController = {
 	state: 'alphabetical',
 	companySortProperties: ['name'],
 	sortedCompanies: Ember.computed.sort('model', 'companySortProperties'),
+	filteredCompanies: function() {
+		switch (this.get('state')) {
+			case 'gainers':
+				return this.get('sortedCompanies').filter(function(company) {
+					return company.get('value') > 0;
+				});
+
+				break;
+			case 'losers':
+				return this.get('sortedCompanies').filter(function(company) {
+					return company.get('value') < 0;
+				});
+
+				break;
+			default:
+				return this.get('sortedCompanies');
+
+				break;
+		}
+	}.property('sortedCompanies', 'state'),
 	actions: {
 		open: function(route, companyID) {
 			this.transitionToRoute(route, companyID);
