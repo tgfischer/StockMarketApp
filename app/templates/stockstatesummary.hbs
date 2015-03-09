@@ -19,14 +19,14 @@
 			<tr>
 				<th>Company</th>
 				<th>Open Price</th>
-				<th>Current Price</th>
+				<th>Last Price</th>
 				<th>Change</th>
 				<th>Share Volume</th>
 				<th></th>
 			</tr>
 		</thead>
 		<tbody>
-			{{#each company in filteredCompanies}}
+			{{#each company in sortedCompanies}}
 				<tr>
 					<td class="vertical-align">
 						{{#link-to 'marketby' company}}
@@ -34,7 +34,7 @@
 						{{/link-to}}
 					</td>
 					<td class="vertical-align">${{company.openPrice}}</td>
-					<td class="vertical-align">${{company.currentPrice}}</td>
+					<td class="vertical-align">${{company.lastPrice}}</td>
 					<td class="vertical-align">
 						{{company.value}} 
 						{{change-image company.value}}

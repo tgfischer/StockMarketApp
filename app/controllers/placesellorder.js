@@ -4,6 +4,26 @@ function isPositiveInteger(n) {
     return n >>> 0 === parseFloat(n);
 }
 
+function computeValue(lastPrice, openPrice) {
+	var value = lastPrice - openPrice;
+
+    if (value === 0) {
+        return value;
+    } else {
+        return value.toFixed(2);
+    }
+}
+
+function computePercent(lastPrice, openPrice) {
+	var percent = Math.abs((lastPrice / openPrice - 1) * 100);
+
+    if (percent === 0) {
+        return  percent;
+    } else {
+        return percent.toFixed(2);
+    }
+}
+
 export default Ember.ObjectController.extend({
 	sortedBidOrdersProperties: ['price:desc', 'time'],
 	sortedBidOrders: Ember.computed.sort('model.bidOrders', 'sortedBidOrdersProperties'),
@@ -12,7 +32,7 @@ export default Ember.ObjectController.extend({
 			if (!isPositiveInteger(this.get('vol')) || !isPositiveInteger(this.get('price'))) { return; }
 			
 			var requestVolume = parseInt(this.get('vol'));
-			var requestPrice = parseInt(this.get('price'));
+			var requestPrice = parseFloat(this.get('price'));
 			var newVolume = 0;
 			var _this = this;
 			
@@ -20,7 +40,7 @@ export default Ember.ObjectController.extend({
 
 			_this.store.find('company', companyID).then(function(company) {
 				for (var i = 0; i < bidOrders.length; i++) {
-					var orderPrice = parseInt(bidOrders.objectAt(i).get('price'));
+					var orderPrice = parseFloat(bidOrders.objectAt(i).get('price'));
 					var orderVolume = parseInt(bidOrders.objectAt(i).get('volume'));
 					
 					if (requestPrice <= orderPrice) {
@@ -37,7 +57,9 @@ export default Ember.ObjectController.extend({
 							i--;
 						}
 
-						company.set('currentPrice', parseInt(orderPrice));
+						company.set('lastPrice', parseFloat(requestPrice));
+						company.set('value', computeValue(parseFloat(company.get('lastPrice')), parseFloat(company.get('openPrice'))));
+						company.set('percent', computePercent(parseFloat(company.get('lastPrice')), parseFloat(company.get('openPrice'))));
 					}
 				}
 
