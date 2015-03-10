@@ -1,18 +1,8 @@
 import Ember from 'ember';
 
-function reverse(arr) {
-	var newArr = [];
-
-	for (var i = arr.length - 1; i > -1; i--) {
-		newArr.push(arr.objectAt(i));
-	}
-
-	return newArr;
-}
-
 export default Ember.ArrayController.extend({
-	state: 'alphabetical',
-	companySortProperties: ['name'],
+	state: 'default',
+	companySortProperties: ['id'],
 	sortedCompanies: Ember.computed.sort('filteredCompanies', 'companySortProperties'),
 	filteredCompanies: function() {
 		switch (this.get('state')) {
@@ -48,37 +38,37 @@ export default Ember.ArrayController.extend({
 		activeByVolume: function() {
 			$('a').parent().removeClass('active');
 
-			if (this.get('state') != 'activeByVolume') {
+			if (this.get('state') !== 'activeByVolume') {
 				this.set('companySortProperties', ['volume:desc']);
 				this.set('state', 'activeByVolume');
 				$('a:contains("Most Active By Volume")').parent().addClass('active');
 			} else {
-				this.set('companySortProperties', ['name']);
-				this.set('state', 'alphabetical');
+				this.set('companySortProperties', ['id']);
+				this.set('state', 'default');
 			}
 		},
 		gainers: function() {
 			$('a').parent().removeClass('active');
 
-			if (this.get('state') != 'gainers') {
+			if (this.get('state') !== 'gainers') {
 				this.set('companySortProperties', ['value:desc']);
 				this.set('state', 'gainers');
 				$('a:contains("Gainers")').parent().addClass('active');
 			} else {
-				this.set('companySortProperties', ['name']);
-				this.set('state', 'alphabetical');
+				this.set('companySortProperties', ['id']);
+				this.set('state', 'default');
 			}
 		},
 		losers: function() {
 			$('a').parent().removeClass('active');
 			
-			if (this.get('state') != 'losers') {
+			if (this.get('state') !== 'losers') {
 				this.set('companySortProperties', ['value']);
 				this.set('state', 'losers');
 				$('a:contains("Losers")').parent().addClass('active');
 			} else {
-				this.set('companySortProperties', ['name']);
-				this.set('state', 'alphabetical');
+				this.set('companySortProperties', ['id']);
+				this.set('state', 'default');
 			}
 		}
 	}
