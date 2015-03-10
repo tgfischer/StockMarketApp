@@ -5,7 +5,6 @@ export default Ember.Route.extend({
 		return this.store.find('company');
 	},
 	redirect: function(model) {
-		//console.log(this.store.find('company'));
 		if (model.get('firstObject')) {
 			return this.transitionTo('marketby', model.get('firstObject'));
 		} else {
